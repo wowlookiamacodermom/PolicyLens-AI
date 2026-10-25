@@ -6,6 +6,7 @@ Run from the project root:
 Test labels were produced by an LLM (Claude) and are NOT human-verified, so the scores
 below mean "agreement with LLM-made labels".
 """
+import json
 from pathlib import Path
 
 import numpy as np
@@ -26,7 +27,11 @@ def main():
     df = pd.read_csv(TEST)
     tok = AutoTokenizer.from_pretrained(str(MODEL_DIR))
     model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_DIR)).eval()
-    id2label = {int(k): v for k, v in model.config.id2label.items()}
+    labels_file = MODEL_DIR / "labels.json"
+    if labels_file.exists():
+        id2label = {int(v): k for k, v in json.loads(labels_file.read_text(encoding="utf-8")).items()}
+    else:
+        id2label = {int(k): v for k, v in model.config.id2label.items()}
     labels = [id2label[i] for i in sorted(id2label)]
 
     preds = []

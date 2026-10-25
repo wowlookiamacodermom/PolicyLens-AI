@@ -43,6 +43,15 @@ clauses extracted from documents and manually verified by at least one
 reviewer. Keep the policy ID, page number, exact source text, and
 annotation provenance.
 
+## Open the app with one click (Windows)
+
+1.  Double-click **`PolicyLens.bat`**. The first time it sets everything up (about 5-10 minutes, needs
+    internet and Python 3.10/3.11). After that it opens in a few seconds.
+2.  Your browser opens PolicyLens by itself. Keep the black window open while you use the app; close it to stop.
+3.  Optional: double-click **`Make_Desktop_Shortcut.bat`** once to put a **PolicyLens AI** icon on your Desktop.
+
+On macOS, double-click `PolicyLens.command` instead (you may need to run `chmod +x PolicyLens.command` once).
+
 ## Quick start
 
 ### Requirements

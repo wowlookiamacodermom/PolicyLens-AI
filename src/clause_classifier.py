@@ -36,26 +36,24 @@ KEYWORDS = {
 
 
 @lru_cache(maxsize=1)
-def _transformer_classifier():
+def _transformer_bundle():
+    """Load (tokenizer, model, id->label). Labels come from labels.json, not from config.id2label."""
     if not (TRANSFORMER_PATH / "config.json").exists():
         return None
     try:
-        from transformers import pipeline
-        return pipeline("text-classification", model=str(TRANSFORMER_PATH), tokenizer=str(TRANSFORMER_PATH))
+        import torch  # noqa: F401
+        from transformers import AutoModelForSequenceClassification, AutoTokenizer
+        tok = AutoTokenizer.from_pretrained(str(TRANSFORMER_PATH))
+        model = AutoModelForSequenceClassification.from_pretrained(str(TRANSFORMER_PATH)).eval()
+        f = TRANSFORMER_PATH / "labels.json"
+        if f.exists():
+            label2id = json.loads(f.read_text(encoding="utf-8"))
+            id2label = {int(v): k for k, v in label2id.items()}
+        else:
+            id2label = {i: l for i, l in enumerate(LABELS)}
+        return tok, model, id2label
     except Exception:
         return None
-
-
-@lru_cache(maxsize=1)
-def _id_to_label() -> dict[str, str]:
-    """Map 'LABEL_3' style names to real labels if the saved config lacks them."""
-    f = TRANSFORMER_PATH / "labels.json"
-    if f.exists():
-        try:
-            return {f"LABEL_{v}": k for k, v in json.loads(f.read_text(encoding="utf-8")).items()}
-        except Exception:
-            pass
-    return {}
 
 
 @lru_cache(maxsize=1)
@@ -81,13 +79,16 @@ def keyword_classify(text: str) -> tuple[str, float]:
 
 def predict_clause(text: str) -> tuple[str, float, str]:
     """Return (label, confidence, method). Uses the best available model; no hand-written overrides."""
-    transformer = _transformer_classifier()
-    if transformer is not None:
+    bundle = _transformer_bundle()
+    if bundle is not None:
         try:
-            result = transformer(text, truncation=True, max_length=MAX_LEN)[0]
-            label = str(result["label"])
-            label = _id_to_label().get(label, label)
-            return label, float(result.get("score", 0.0)), "fine-tuned transformer"
+            import torch
+            tok, model, id2label = bundle
+            batch = tok(text, truncation=True, max_length=MAX_LEN, return_tensors="pt")
+            with torch.no_grad():
+                probs = torch.softmax(model(**batch).logits[0], dim=-1)
+            idx = int(probs.argmax())
+            return id2label[idx], float(probs[idx]), "fine-tuned transformer"
         except Exception:
             pass
 
