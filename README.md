@@ -146,9 +146,8 @@ policy may contain different rules for different sections or benefits.
 -   `page`: PDF page number (1-indexed)
 -   `reviewed`: `yes` only after human review
 
-Supported labels: `coverage`, `exclusion`, `waiting_period`,
-`claim_procedure`, `limit`, `premium`, `renewal_cancellation`,
-`definition`, `other`.
+Supported labels: `claims`, `coverage`, `definition`, `exclusion`, `limit`, `other`, `premium`,
+`renewal`, `waiting_period`.
 
 Do not use the illustrative seed rows for a final evaluation. Add more
 reviewed examples. Split train/test by **policy document**, not by
@@ -164,21 +163,29 @@ This trains a TF-IDF + Logistic Regression baseline and saves it to
 `models/clause_classifier.joblib`. The Streamlit app loads it
 automatically if available.
 
-## Optional: fine-tune a transformer
+## Train the better classifier (Google Colab)
 
-For an experimental run, install `requirements-ml.txt` and run the
-command below. For a meaningful accuracy improvement, first collect
-substantially more manually reviewed examples across multiple policy
-documents:
+The strongest classifier is trained in Google Colab (free GPU) with
+`PolicyLens_Classifier_Colab.ipynb`:
+
+1.  A fixed 300-row test set (`data/eval/test_set_labeled.csv`) is held out and never trained on.
+2.  Gemini labels a few thousand extra clause paragraphs for training; its agreement with the
+    test-set labels is measured first (about 86%).
+3.  TF-IDF, frozen-embedding and fine-tuned transformer models (Legal-BERT, BGE) are compared on
+    the same test set.
+4.  The best model is downloaded as `clause-classifier.zip`. Unzip it so that the folder
+    `models/clause-classifier/` exists, then run:
 
 ``` bash
-python -m src.train_transformer --epochs 3
+python -m src.evaluate_on_testset
 ```
 
-This uses DistilBERT sequence classification. Results are not
-guaranteed; compare macro-F1 against the baseline and use a
-document-level holdout. Do not claim the transformer is better unless
-evaluation supports that claim.
+This writes `reports/evaluation.md` with accuracy, macro-F1, per-class scores and a confusion
+matrix. The app loads `models/clause-classifier` automatically.
+
+**Label note:** all training and test labels except the 20 originally human-reviewed rows were
+produced by LLMs (Claude for the test set, Gemini for training). Reported scores therefore mean
+agreement with LLM-made labels, not human-verified ground truth.
 
 ## Run tests
 
@@ -213,26 +220,24 @@ PolicyLens-AI/
 
 ## Current prototype status and model evaluation
 
-The project currently demonstrates PDF text extraction, evidence
-retrieval, page references, simple-English explanations, and clause
-classification. The DistilBERT classifier was trained on a small set of
-150 reviewed examples across nine labels. In the latest recorded
-document-level evaluation, it achieved approximately **28.95% accuracy**
-and **0.3048 macro-F1** on 38 evaluation examples from 11 documents.
+The prototype demonstrates PDF text extraction, evidence retrieval, page references,
+simple-English explanations, and clause classification into nine labels.
 
-These scores are low and indicate that classification is still
-experimental. Some labels have very few examples, and the `other`
-category is especially limited across source documents. The app also
-uses targeted rules for a few common patterns; these rules can improve
-those specific cases but do **not** increase or replace the measured
-overall model accuracy.
+Classification results (measured on a fixed 300-row test set; see `reports/evaluation.md`):
 
-For an academic report, present the scores above as the current measured
-result, not as a high-accuracy production classifier. Improve the
-dataset with more manually verified examples from diverse policy
-documents, keep near-duplicate clauses from the same policy in only one
-split, and compare the transformer against the TF-IDF baseline using the
-same held-out documents.
+| Model | Accuracy | Macro-F1 |
+|---|---|---|
+| Keyword rules | 46.3% | - |
+| TF-IDF + Logistic Regression (150 reviewed rows) | 46.7% | 0.46 |
+| Fine-tuned transformer (Colab, Gemini-labelled data) | FILL_ACC | FILL_F1 |
+
+An earlier DistilBERT run reported 28.95% accuracy and 0.3048 macro-F1 on only 38 examples, so it
+was too small a test to trust. The test set above is larger and drawn from the real mix of text
+in the policy documents (about half of which is `other`: headings, addresses, fragments).
+
+Known limits: labels are LLM-made and noisy (Gemini agreed with the test labels 86% of the
+time); many paragraphs are broken fragments or fit more than one label; scanned PDFs need OCR.
+The app no longer applies hand-written rule overrides, so what it shows is the model's output.
 
 ## Evaluation plan
 

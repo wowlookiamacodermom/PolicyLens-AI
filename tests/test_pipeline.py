@@ -1,15 +1,25 @@
-from src.clause_classifier import keyword_classify
+from src.clause_classifier import keyword_classify, predict_clause, LABELS
 from src.retriever import chunk_pages, Retriever
+
 
 def test_keyword_classifier_returns_label():
     label, score = keyword_classify("The policy excludes cosmetic treatment.")
     assert label == "exclusion"
     assert score > 0
 
+
+def test_predict_clause_returns_known_label():
+    label, conf, method = predict_clause("The waiting period for pre-existing diseases is 36 months.")
+    assert label in LABELS
+    assert 0.0 <= conf <= 1.0
+    assert method
+
+
 def test_chunk_pages_preserves_page_number():
     chunks = chunk_pages([{"page": 7, "text": "waiting period " * 80}], chunk_words=30, overlap=5)
     assert chunks
     assert all(c.page == 7 for c in chunks)
+
 
 def test_retriever_returns_matching_passage():
     passages = chunk_pages([{"page": 2, "text": "The waiting period for pre-existing diseases is described in this section."}])
