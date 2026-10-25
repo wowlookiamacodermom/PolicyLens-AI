@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.vscode/
+data/raw/
+data/processed/
+uploads/
+cache/
+vector_store/
+models/*
+!models/.gitkeep
+*.pdf
+*.log
+# Annotation datasets and backups
+data/annotations/

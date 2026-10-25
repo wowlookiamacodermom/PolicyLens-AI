@@ -1,0 +1,51 @@
+﻿record_id,insurer,candidate_product_or_document,document_type_to_collect,official_source_page,status,notes
+SRC001,HDFC ERGO,my:Optima Secure,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC002,HDFC ERGO,Optima Restore,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC003,HDFC ERGO,Optima Lite,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC004,HDFC ERGO,Optima Super Secure,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC005,HDFC ERGO,Easy Health,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC006,HDFC ERGO,Arogya Sanjeevani Policy - Retail,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC007,HDFC ERGO,my:health Medisure Super Top Up,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC008,HDFC ERGO,Optima Senior,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC009,HDFC ERGO,Optima Vital,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC010,HDFC ERGO,Optima Plus,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC011,HDFC ERGO,Optima Super,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC012,HDFC ERGO,my:health Critical Illness,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC013,HDFC ERGO,Energy,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC014,HDFC ERGO,HDFC ERGO Group Health Insurance,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC015,HDFC ERGO,HDFC ERGO Group Mediclaim Insurance Policy,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC016,HDFC ERGO,ABCD Chronic Care,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC017,HDFC ERGO,Limitless,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC018,HDFC ERGO,Parenthood,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC019,HDFC ERGO,HDFC ERGO Secure 4in1,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC020,HDFC ERGO,my:health Suraksha,Policy wording,https://www.hdfcergo.com/download/policy-wordings/health,to_download_and_verify,Open catalog and select exact current version
+SRC021,Star Health,Star Comprehensive Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC022,Star Health,Medi Classic Insurance Policy (Individual),Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC023,Star Health,Super Surplus Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC024,Star Health,Star Micro Rural and Farmers Care,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC025,Star Health,Star Out Patient Care Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC026,Star Health,Star Health Premier Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC027,Star Health,Star Health Assure Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC028,Star Health,Young Star Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC029,Star Health,Family Health Optima Insurance Plan,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC030,Star Health,Senior Citizens Red Carpet Health Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC031,Star Health,Arogya Sanjeevani Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC032,Star Health,Star Women Care Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC033,Star Health,Star Health Gain Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC034,Star Health,Star Super Surplus (Floater),Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC035,Star Health,Star Hospital Cash Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC036,Star Health,Star Cardiac Care Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC037,Star Health,Star Cancer Care Platinum Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC038,Star Health,Star Diabetes Safe Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC039,Star Health,Star Critical Illness Multipay Insurance Policy,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC040,Star Health,Star Special Care Gold,Policy wording,https://www.starhealth.in/downloads/,to_download_and_verify,Open catalog and select exact current version
+SRC041,SBI General,SBI General Health Alpha,Policy wording / CIS,https://www.sbigeneral.in/downloads,to_download_and_verify,Open catalog and select exact current version
+SRC042,SBI General,Arogya Sanjeevani Policy - SBI General,Policy wording / CIS,https://www.sbigeneral.in/downloads,to_download_and_verify,Open catalog and select exact current version
+SRC043,SBI General,Critical Illness Insurance Policy,Policy wording / CIS,https://www.sbigeneral.in/downloads,to_download_and_verify,Open catalog and select exact current version
+SRC044,SBI General,Super Health Insurance,Policy wording / CIS,https://www.sbigeneral.in/downloads,to_download_and_verify,Open catalog and select exact current version
+SRC045,SBI General,Health Insurance Customer Information Sheet,Policy wording / CIS,https://www.sbigeneral.in/downloads,to_download_and_verify,Open catalog and select exact current version
+SRC046,IRDAI portal / listed insurer,United India Individual Health Insurance Policy - Platinum / Gold / Senior Citizen,Policy wording or regulatory-listed document,https://irdai.gov.in/health-insurance-products,to_download_and_verify,"Use IRDAI product search; verify insurer, UIN, approval year, document and status."
+SRC047,IRDAI portal / listed insurer,Universal Sompo Corona Rakshak Policy,Policy wording or regulatory-listed document,https://irdai.gov.in/health-insurance-products,to_download_and_verify,"Use IRDAI product search; verify insurer, UIN, approval year, document and status."
+SRC048,IRDAI portal / listed insurer,Aditya Birla Health Corona Rakshak Policy,Policy wording or regulatory-listed document,https://irdai.gov.in/health-insurance-products,to_download_and_verify,"Use IRDAI product search; verify insurer, UIN, approval year, document and status."
+SRC049,IRDAI portal / listed insurer,New India Assurance Mediclaim / retail health product,Policy wording or regulatory-listed document,https://irdai.gov.in/health-insurance-products,to_download_and_verify,"Use IRDAI product search; verify insurer, UIN, approval year, document and status."
+SRC050,IRDAI portal / listed insurer,IRDAI health policy product document archive,Policy wording or regulatory-listed document,https://irdai.gov.in/health-insurance-products,to_download_and_verify,"Use IRDAI product search; verify insurer, UIN, approval year, document and status."
