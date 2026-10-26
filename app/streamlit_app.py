@@ -261,25 +261,75 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-VIEWS = ["Summary", "Ask a question", "Clause map", "Page text"]
+VIEWS = ["Summary", "Ask a question", "Clause explorer", "Page text"]
 view = st.radio("Section", VIEWS, horizontal=True, label_visibility="collapsed", key="view")
 st.write("")
 
 # --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 if view == "Summary":
-    summary = summarize_policy(pages)
-    st.subheader("What the policy says, in short")
-    st.markdown('<p class="meta">Taken straight from the document. Each point shows its page so you can check the original wording.</p>',
-                unsafe_allow_html=True)
-    for topic, items in summary.items():
-        with st.expander(topic, expanded=bool(items)):
-            if items:
-                for item in items:
-                    st.markdown(
-                        f'<div class="quote"><div class="serif">{esc(item["text"])}</div>'
-                        f'<div class="src">Page {item["page"]}</div></div>', unsafe_allow_html=True)
-            else:
-                st.info(f"No clear text about {topic.lower()} was found. Check the full policy.")
+    st.subheader("Executive Policy Summary")
+    st.markdown(
+        '<p class="meta">A concise overview of coverage, rules, and claim procedures in plain English.</p>',
+        unsafe_allow_html=True,
+    )
+
+    summary_data = summarize_policy(pages)
+
+    # Helper to pick only the top 2 brief highlights per category
+    def get_highlights(key, max_items=2):
+        items = [i["text"].strip().rstrip(".") for i in summary_data.get(key, []) if i.get("text")]
+        return items[:max_items]
+
+    coverage = get_highlights("Coverage")
+    exclusions = get_highlights("Exclusions")
+    waiting = get_highlights("Waiting periods")
+    claims = get_highlights("Claims")
+    limits = get_highlights("Limits")
+
+    sentences = []
+
+    if coverage:
+        cov_text = esc("; ".join(coverage))
+        sentences.append(
+            f'This policy covers <span class="hl" style="background:#CFEFD8;border-color:#2E7D4F">{cov_text}</span>.'
+        )
+
+    if limits:
+        lim_text = esc("; ".join(limits))
+        sentences.append(
+            f'Key limits include <span class="hl" style="background:#FFE3B5;border-color:#B26A00">{lim_text}</span>.'
+        )
+
+    if waiting:
+        wait_text = esc("; ".join(waiting))
+        sentences.append(
+            f'Waiting periods apply to <span class="hl" style="background:#FFF0A3;border-color:#B8960C">{wait_text}</span>.'
+        )
+
+    if exclusions:
+        excl_text = esc("; ".join(exclusions))
+        sentences.append(
+            f'Exclusions include <span class="hl" style="background:#FFD6D2;border-color:#B3392F">{excl_text}</span>.'
+        )
+
+    if claims:
+        claim_text = esc("; ".join(claims))
+        sentences.append(
+            f'Claims require <span class="hl" style="background:#CFE5FF;border-color:#2563A8">{claim_text}</span>.'
+        )
+
+    if sentences:
+        compact_summary = " ".join(sentences)
+        st.markdown(
+            f'<div class="doc"><div class="serif" style="font-size:1.1rem; line-height:1.75;">'
+            f'{compact_summary}</div></div>',
+            unsafe_allow_html=True,
+        )
+    else:
+        st.info("No clear policy details could be summarized.")
 
     st.subheader("How often key topics come up")
     low = "\n".join(p["text"] for p in pages).lower()
@@ -291,11 +341,15 @@ if view == "Summary":
         "Limits": ["sub-limit", "deductible", "co-payment", "sum insured"],
     }
     st.markdown(
-        '<div class="facts">' + "".join(
-            f"<div><b>{sum(low.count(w) for w in ws)}</b>{name}</div>" for name, ws in terms.items()) + "</div>"
+        '<div class="facts">'
+        + "".join(
+            f"<div><b>{sum(low.count(w) for w in ws)}</b>{name}</div>"
+            for name, ws in terms.items()
+        )
+        + "</div>"
         '<p class="meta">These counts only show where to look. They are not findings about what is covered.</p>',
-        unsafe_allow_html=True)
-
+        unsafe_allow_html=True,
+    )
 # --------------------------------------------------------------------------------------
 elif view == "Ask a question":
     st.subheader("Ask about this policy")
@@ -345,8 +399,9 @@ elif view == "Ask a question":
                     unsafe_allow_html=True)
 
 # --------------------------------------------------------------------------------------
-elif view == "Clause map":
-    st.subheader("Clause map")
+# --------------------------------------------------------------------------------------
+elif view == "Clause explorer":
+    st.subheader("Clause explorer")
     st.markdown(
         '<p class="meta">Every paragraph is tagged with what it is about. The tags come from a trained model, '
         "so a few will be wrong. Use them to jump around, then read the text itself.</p>",
